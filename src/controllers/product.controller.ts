@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { io } from '../app';
 import {
 	deleteProduct,
 	getProduct,
@@ -52,6 +53,13 @@ const postItem = async ({ body }: Request, res: Response) => {
 	try {
 		const responseProduct = await insertProduct(body);
 		res.send(responseProduct);
+		io.emit(
+			'data',
+			{
+				body: responseProduct,
+			},
+			console.log('Hola')
+		);
 	} catch (e) {
 		handleHttp(res, 'Error al enviar el producto', e);
 	}

@@ -1,5 +1,21 @@
-const registerUser = async () => {};
+import { Request, Response } from 'express';
+import { loginUser, registerNewUser } from '../services/auth';
 
-const loginUser = async () => {};
+const registerCtrl = async ({ body }: Request, res: Response) => {
+	const responseUser = await registerNewUser(body);
+	res.send(responseUser);
+};
 
-export { loginUser, registerUser };
+const loginCtrl = async ({ body }: Request, res: Response) => {
+	const { email, password } = body;
+	const responseUser = await loginUser({ email, password });
+
+	if (responseUser === 'PASSWORD_INCORRECT') {
+		res.status(403);
+		res.send(responseUser);
+	} else {
+		res.send(responseUser);
+	}
+};
+
+export { loginCtrl, registerCtrl };

@@ -1,4 +1,4 @@
-export interface Product {
+export interface Order {
 	name: string;
 	orderNumber: number;
 	meals: Array<any>;

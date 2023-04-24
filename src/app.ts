@@ -7,11 +7,13 @@ import responseTime from 'response-time';
 import { Server as WebSocketServer } from 'socket.io';
 import db from './config/mongo';
 import { router } from './routes';
+import { createRoles } from './utils/createRoles.handle';
 
 const PORT = process.env.PORT || 3002;
 const SOCKETSPORT = process.env.SOCKETS_PORT || 3003;
 
 const app = express();
+createRoles();
 
 //Middlewares
 app.use(cors());

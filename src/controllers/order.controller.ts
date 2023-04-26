@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {
+	completeOrder,
 	deleteOrder,
 	getOrder,
 	getOrders,
@@ -48,6 +49,16 @@ const deleteItem = async ({ params }: Request, res: Response) => {
 	}
 };
 
+const completeItem = async ({ params }: Request, res: Response) => {
+	try {
+		const { id } = params;
+		const responseOrder = await completeOrder(id);
+		res.send(responseOrder);
+	} catch (e) {
+		handleHttp(res, 'Error al eliminar la orden', e);
+	}
+};
+
 const postItem = async ({ body }: Request, res: Response) => {
 	try {
 		const responseOrder = await insertOrder(body);
@@ -57,4 +68,4 @@ const postItem = async ({ body }: Request, res: Response) => {
 	}
 };
 
-export { getItem, getItems, updateItem, deleteItem, postItem };
+export { getItem, getItems, updateItem, deleteItem, postItem, completeItem };

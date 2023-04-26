@@ -1,5 +1,6 @@
 import { Order } from '../interfaces/order.interface';
 import OrderModel from '../models/Order';
+import SalesModel from '../models/Sales';
 import { calculateOrder } from '../utils/caltulatePrice.handle';
 import { emitOrder } from '../utils/sockets.handle';
 
@@ -66,4 +67,24 @@ const deleteOrder = async (id: string) => {
 	return responseItem;
 };
 
-export { insertOrder, getOrders, getOrder, updateOrder, deleteOrder };
+const completeOrder = async (id: string) => {
+	//Guardar la orden antes de eliminar
+	const order = await OrderModel.findOne({ orderNumber: id });
+	// const salesUpdated = await SalesModel.create(order);
+	// console.log(salesUpdated);
+	const responseItem = await OrderModel.findOneAndRemove({ orderNumber: id });
+
+	//Lista actualizada para el front
+	const orderAfterDelete = await OrderModel.find({});
+	emitOrder(orderAfterDelete);
+	return responseItem;
+};
+
+export {
+	insertOrder,
+	getOrders,
+	getOrder,
+	updateOrder,
+	deleteOrder,
+	completeOrder,
+};

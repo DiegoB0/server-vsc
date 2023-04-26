@@ -20,6 +20,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(responseTime());
+app.use(express.urlencoded());
 
 //Rutas
 app.use(router);

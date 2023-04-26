@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+	completeItem,
 	deleteItem,
 	getItem,
 	getItems,
@@ -18,5 +19,7 @@ router.post('/', postItem);
 router.put('/:id', updateItem);
 
 router.delete('/:id', deleteItem);
+
+router.delete('/complete/:id', completeItem);
 
 export { router };

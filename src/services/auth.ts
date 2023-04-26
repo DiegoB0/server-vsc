@@ -56,7 +56,7 @@ const loginUser = async ({ email, password }: Auth) => {
 	if (!isCorrect) return 'PASSWORD_INCORRECT';
 
 	const token = generateToken(checksIs.email);
-	console.log(checksIs.role);
+
 	return token;
 };
 

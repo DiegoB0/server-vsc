@@ -5,8 +5,8 @@ const emitOrder = (data: any) => {
 		'order',
 		{
 			body: data,
-		}
-		// console.log('Enviado')
+		},
+		console.log('Enviado')
 	);
 };
 

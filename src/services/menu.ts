@@ -19,18 +19,14 @@ const getMenu = async (id: string) => {
 };
 
 const updateMenu = async (id: string, data: Menu) => {
-	const responseItem = await MenuModel.findOneAndUpdate(
-		{ orderNumber: id },
-		data,
-		{
-			new: true,
-		}
-	);
+	const responseItem = await MenuModel.findOneAndUpdate({ _id: id }, data, {
+		new: true,
+	});
 	return responseItem;
 };
 
 const deleteMenu = async (id: string) => {
-	const responseItem = await MenuModel.findOneAndRemove({ orderNumber: id });
+	const responseItem = await MenuModel.findOneAndRemove({ _id: id });
 	return responseItem;
 };
 
